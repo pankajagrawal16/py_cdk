@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "DummyCheck"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "$ref": "#/components/schemas/DummyCheck"
+          },
+          "detail-type": {
+            "type": "string",
+            "enum": ["install", "check"]
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "FirmwareCheck": {
+        "type": "object",
+        "required": [
+          "dusn",
+          "device_info",
+          "target_firmware"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "device_info": {
+            "type": "object",
+            "properties": {
+              "current_running_version": {
+                "type": "string"
+              }
+            }
+          },
+          "target_firmware": {
+            "type": "object",
+            "properties": {
+              "firmware_version": {
+                "type": "string"
+              },
+              "firmware_type": {
+                "type": "string"
+              }
+            }
+          },
+          "external_ref": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

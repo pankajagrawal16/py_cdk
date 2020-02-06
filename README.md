@@ -1,8 +1,8 @@
 
-# Welcome to your CDK Python project!
+# Welcome to your CDK Python project for POC on event bridge!
 
 You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`py_cdk_stack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+which contains an POC on setting up event bridge and schemas
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -25,12 +25,6 @@ step to activate your virtualenv.
 $ source .env/bin/activate
 ```
 
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .env\Scripts\activate.bat
-```
-
 Once the virtualenv is activated, you can install the required dependencies.
 
 ```
@@ -43,7 +37,7 @@ At this point you can now synthesize the CloudFormation template for this code.
 $ cdk synth
 ```
 
-You can now begin exploring the source code, contained in the hello directory.
+You can now begin exploring the source code, contained in the directory.
 There is also a very trivial test included that can be run like this:
 
 ```
