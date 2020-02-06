@@ -33,10 +33,13 @@ class PyCdkStack(core.Stack):
                                  assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
                                  managed_policies=[
                                      ManagedPolicy.from_aws_managed_policy_name('AmazonEventBridgeFullAccess'),
+                                     ManagedPolicy.from_aws_managed_policy_name('AmazonEventBridgeSchemasReadOnlyAccess'),
                                      ManagedPolicy.from_aws_managed_policy_name('service-role/AWSLambdaBasicExecutionRole'),
                                      ManagedPolicy.from_managed_policy_name(self, 'CloudWatchPutMetricsPolicy', 'PutCloudWatchMetric')
                                  ]
                                  )
+
+        layer = lam.LayerVersion(self, id='CommonLayer', code=Code.from_asset('asset/package'))
 
         generator = lam.Function(self,
                                  id='EventGeneratorForBus',
@@ -55,6 +58,7 @@ class PyCdkStack(core.Stack):
                                 function_name='EventConsumerForBus',
                                 timeout=Duration.seconds(60),
                                 role=consumer_role,
+                                layers=[layer],
                                 runtime=Runtime.PYTHON_3_7)
 
         generator_target = target.LambdaFunction(generator)

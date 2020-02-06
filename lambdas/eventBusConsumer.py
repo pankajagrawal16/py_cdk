@@ -5,7 +5,6 @@ import boto3
 import jsonschema
 from jsonschema import ValidationError
 
-boto3.setup_default_session(profile_name='usermgt')
 cloud_watch = boto3.client('cloudwatch')
 schema = boto3.client('schemas')
 

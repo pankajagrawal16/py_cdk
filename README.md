@@ -50,6 +50,12 @@ command.
 
 ## Useful commands
 
+before deploying and when there are new dependencies
+
+``
+pip install -r lambdas/requirements.txt --target ./asset/package/python
+``
+
  * `cdk ls`          list all stacks in the app
  * `cdk synth`       emits the synthesized CloudFormation template
  * `cdk deploy`      deploy this stack to your default AWS account/region
