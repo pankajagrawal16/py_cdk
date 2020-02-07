@@ -3,13 +3,12 @@ from aws_cdk import (
     aws_lambda as lam,
     aws_events_targets as target,
     aws_events as event,
-    aws_eventschemas as schema,
     core
 )
 from aws_cdk.aws_iam import ManagedPolicy
 from aws_cdk.aws_lambda import Code, Runtime
 from aws_cdk.core import Duration
-from pathlib import Path
+from schema_registry import SchemaRegistry
 
 
 class PyCdkStack(core.Stack):
@@ -83,16 +82,4 @@ class PyCdkStack(core.Stack):
                    schedule=event.Schedule.rate(Duration.minutes(1))
                    )
 
-        schema_registry = schema.CfnRegistry(self,
-                                             id='DummySchemaRegistry',
-                                             registry_name='DummySchemaRegistry',
-                                             description='Maintaining schema for events'
-                                             )
-
-        schema.CfnSchema(self,
-                         id='DummyCheck',
-                         registry_name=schema_registry.registry_name,
-                         schema_name='DummyCheck',
-                         type='OpenApi3',
-                         content=Path('schemas/DummyCheck.json').read_text()
-                         )
+        SchemaRegistry(self, "SchemaRegistry")
